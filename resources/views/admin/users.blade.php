@@ -11,7 +11,11 @@
 	        </ul>
 	    </div>
 	@endif
-
+	@if (session('status'))
+	    <div class="alert alert-success">
+	        {{ session('status') }}
+	    </div>
+	@endif
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8">
@@ -83,7 +87,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Postal Code</label>
-                                        <input type="number" class="form-control" name="txtPostalCode" placeholder="ZIP Code" value="@if(!empty($UserData->postal_code)) {{ $UserData->postal_code }} @endif">
+                                        <input type="text" class="form-control" name="txtPostalCode" placeholder="ZIP Code" value="@if(!empty($UserData->postal_code)) {{ $UserData->postal_code }} @endif">
                                     </div>
                                 </div>
                             </div>

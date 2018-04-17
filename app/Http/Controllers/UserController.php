@@ -28,7 +28,7 @@ class UserController extends Controller
     {
         //$users = DB::table('users')->leftJoin('posts', 'users.id', '=', 'posts.user_id')->get();
         $data = Auth::user();
-        $UserData = UserData::where('user_id', $data->id)->get();
+        $UserData = UserData::where('user_id', $data->id)->first();
         return view('admin.users', ['data' => $data, 'UserData' => $UserData]);
     }
 
@@ -57,7 +57,7 @@ class UserController extends Controller
         ]);
 
         $data = Auth::user();
-        $userdata = new UserDatas();
+        $userdata = new UserData();
         $userdata->user_id = $data->id;
         $userdata->first_name = $request->input('txtFirstname');
         $userdata->last_name = $request->input('txtLastname');
@@ -68,7 +68,7 @@ class UserController extends Controller
         $userdata->about_me = $request->input('txtAboutme');
         $userdata->save();
 
-        return view('admin.users', ['data' => $data, 'UserData' => $UserData]);
+        return redirect('user')->with('status', 'Profile updated!');
     }
 
     /**
