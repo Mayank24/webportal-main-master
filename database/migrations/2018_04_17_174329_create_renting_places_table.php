@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserDatasTable extends Migration
+class CreateRentingPlacesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,16 @@ class CreateUserDatasTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_data', function (Blueprint $table) {
+        Schema::create('renting_places', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->longText('address');
+            $table->string('place_name');
+            $table->longText('place_description');
             $table->string('city');
             $table->string('country');
             $table->string('postal_code');
             $table->string('image')->nullable();
-            $table->longText('about_me');
+            $table->string('price');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
@@ -37,6 +36,6 @@ class CreateUserDatasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_data');
+        Schema::dropIfExists('renting_places');
     }
 }

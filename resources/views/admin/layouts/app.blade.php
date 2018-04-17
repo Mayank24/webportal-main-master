@@ -10,6 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <meta name="_token" content="{{ csrf_token() }}"/>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -71,9 +72,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="table.html">
+                    <a href="{{ route('renting') }}">
                         <i class="pe-7s-note2"></i>
-                        <p>Table List</p>
+                        <p>Renting Places</p>
                     </a>
                 </li>
                 <li>
@@ -226,7 +227,148 @@
 
     </div>
 </div>
+<div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create Renting Place</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="/renting/create" method="post">
+                        {{ csrf_field() }}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Apartment Name</label>
+                                    <input type="text" class="form-control" placeholder="Apartment Name" name="txtApartmentname">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Place Name</label>
+                                    <input type="text" class="form-control" placeholder="Place Name" name="txtPlacename">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Place Description</label>
+                                    <textarea rows="5" class="form-control" placeholder="Here can be your renting place description" name="txtPlaceDescription"></textarea>
+                                    <!-- <input type="text" class="form-control" placeholder="Place Description" name="txtPlaceDescription"> -->
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <input type="text" class="form-control" placeholder="City" name="txtCity">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Country</label>
+                                    <input type="text" class="form-control" placeholder="Country" name="txtCountry">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Postal Code</label>
+                                    <input type="text" class="form-control" placeholder="Postal Code" name="txtPostalCode">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Price</label>
+                                    <input type="text" class="form-control" placeholder="Price in $" name="txtPrice">
+                                </div>
+                            </div>
+                        </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="myModalEdit" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit Renting Place</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post" id="formupdate">
+                        {{ csrf_field() }}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Apartment Name</label>
+                                    <input type="text" class="form-control" placeholder="Apartment Name" name="txtApartmentname" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Place Name</label>
+                                    <input type="text" class="form-control" placeholder="Place Name" name="txtPlacename" value="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Place Description</label>
+                                    <textarea rows="5" class="form-control" placeholder="Here can be your renting place description" id="txtPlaceDescription" name="txtPlaceDescription"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <input type="text" class="form-control" placeholder="City" name="txtCity" value="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Country</label>
+                                    <input type="text" class="form-control" placeholder="Country" name="txtCountry" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Postal Code</label>
+                                    <input type="text" class="form-control" placeholder="Postal Code" name="txtPostalCode" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Price</label>
+                                    <input type="text" class="form-control" placeholder="Price in $" name="txtPrice" value="">
+                                </div>
+                            </div>
+                        </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Update</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
         <!-- Scripts -->
@@ -262,6 +404,30 @@
             },{
                 type: 'info',
                 timer: 4000
+            });
+
+            $('#ModalEdit').click(function(e){
+                var id = $('#ModalEdit').attr('data-id');
+                $.ajax({
+                    type: 'POST',
+                    dataType: "json",
+                    url: "{{ url('rent') }}/"+id,
+                    data: {
+                        '_token': $('input[name=_token]').val(),
+                        'id': id
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        $('input[name="txtApartmentname"]').val(data.apartment_name);
+                        $('input[name="txtPlacename"]').val(data.place_name);
+                        $('textarea#txtPlaceDescription').val(data.place_description);
+                        $('input[name="txtCity"]').val(data.city);
+                        $('input[name="txtCountry"]').val(data.country);
+                        $('input[name="txtPostalCode"]').val(data.postal_code);
+                        $('input[name="txtPrice"]').val(data.price);
+                        $('#formupdate').attr('action','/renting/update/'+data.id);
+                    },
+                });
             });
 
         });

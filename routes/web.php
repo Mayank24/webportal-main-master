@@ -23,3 +23,9 @@ Route::get('/admin','AdminController@index')->name('admin');
 
 Route::get('/user','UserController@index')->name('user');
 Route::post('/user/save','UserController@store');
+
+Route::get('/renting','RentController@index')->name('renting');
+Route::post('/rent/{id}','RentController@edit');
+Route::post('/renting/update/{id}','RentController@update');
+Route::any('/renting/delete/{id}','RentController@destroy');
+Route::post('/renting/create','RentController@store');
