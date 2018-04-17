@@ -59,13 +59,13 @@
 
             <ul class="nav">
                 <li class="active">
-                    <a href="dashboard.html">
+                    <a href="{{ route('admin') }}">
                         <i class="pe-7s-graph"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li>
-                    <a href="user.html">
+                    <a href="{{ route('user') }}">
                         <i class="pe-7s-user"></i>
                         <p>User Profile</p>
                     </a>
