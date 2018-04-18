@@ -29,3 +29,13 @@ Route::post('/rent/{id}','RentController@edit');
 Route::post('/renting/update/{id}','RentController@update');
 Route::any('/renting/delete/{id}','RentController@destroy');
 Route::post('/renting/create','RentController@store');
+
+Route::get('/events', 'EventsController@index')->name('events');
+Route::post('/event/create','EventsController@store');
+Route::post('/event/{id}','EventsController@edit');
+Route::post('/event/update/{id}','EventsController@update');
+Route::any('/event/delete/{id}','EventsController@destroy');
+
+
+
+

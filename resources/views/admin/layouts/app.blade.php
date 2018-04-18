@@ -78,9 +78,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="typography.html">
+                    <a href="{{ route('events') }}">
                         <i class="pe-7s-news-paper"></i>
-                        <p>Typography</p>
+                        <p>Events</p>
                     </a>
                 </li>
                 <li>
@@ -229,6 +229,69 @@
 </div>
 <div class="container">
     <!-- Modal -->
+    <div class="modal fade" id="myModalEvents" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create Events</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="/event/create" method="post">
+                        {{ csrf_field() }}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Event Name</label>
+                                    <input type="text" class="form-control" placeholder="Event Name" name="txtEventname">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Category</label>
+                                    <input type="text" class="form-control" placeholder="Category" name="selectCategory"> <!-- Select box for category-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Event Description</label>
+                                    <textarea rows="5" class="form-control" placeholder="Here can be your event description" name="txtEventDescription"></textarea>
+                                    <!-- <input type="text" class="form-control" placeholder="Place Description" name="txtPlaceDescription"> -->
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <input type="text" class="form-control" placeholder="City" name="txtCity">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Country</label>
+                                    <input type="text" class="form-control" placeholder="Country" name="txtCountry">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Postal Code</label>
+                                    <input type="text" class="form-control" placeholder="Postal Code" name="txtPostalCode">
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -368,6 +431,71 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModalEventEdit" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit Event</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post" id="formEventupdate">
+                        {{ csrf_field() }}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Event Name</label>
+                                    <input type="text" class="form-control" placeholder="Event Name" name="txtEventname" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Event Category</label>
+                                    <input type="text" class="form-control" placeholder="Select Category" name="selectCategory" value="">
+                                    <!-- put select box here for category-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Event Description</label>
+                                    <textarea rows="5" class="form-control" placeholder="Here can be your Event description" id="txtEventDescription" name="txtEventDescription"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <input type="text" class="form-control" placeholder="City" name="txtCity" value="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Country</label>
+                                    <input type="text" class="form-control" placeholder="Country" name="txtCountry" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Postal Code</label>
+                                    <input type="text" class="form-control" placeholder="Postal Code" name="txtPostalCode" value="">
+                                </div>
+                            </div>
+                        </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Update</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 </body>
@@ -426,6 +554,29 @@
                         $('input[name="txtPostalCode"]').val(data.postal_code);
                         $('input[name="txtPrice"]').val(data.price);
                         $('#formupdate').attr('action','/renting/update/'+data.id);
+                    },
+                });
+            });
+
+            $('#ModalEventEdit').click(function(e){
+                var id = $('#ModalEventEdit').attr('data-id');
+                $.ajax({
+                    type: 'POST',
+                    dataType: "json",
+                    url: "{{ url('event') }}/"+id,
+                    data: {
+                        '_token': $('input[name=_token]').val(),
+                        'id': id
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        $('input[name="txtEventname"]').val(data.event_name);
+                        $('input[name="selectCategory"]').val(data.event_category);
+                        $('textarea#txtEventDescription').val(data.event_description);
+                        $('input[name="txtCity"]').val(data.city);
+                        $('input[name="txtCountry"]').val(data.country);
+                        $('input[name="txtPostalCode"]').val(data.postal_code);
+                        $('#formEventupdate').attr('action','/event/update/'+data.id);
                     },
                 });
             });
